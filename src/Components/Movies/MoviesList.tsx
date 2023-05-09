@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import { fetchMovies } from "../../api/api";
+import { MoviesContext } from "../../store/MoviesContext";
 
 interface Movie {
   imdbID: string;
@@ -12,19 +13,32 @@ interface Movie {
 }
 
 const MoviesList = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [state, setState] = useContext(MoviesContext);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     fetchMovies()
-      .then((data) => setMovies(data))
+      .then((data) => setState((state) => ({ ...state, movies: data })))
       .catch((error) => console.log(error));
+    setFilteredMovies(state.movies);
   }, []);
+
+  useEffect(() => {
+    if (state.searchQuery === "") {
+      setFilteredMovies(state.movies);
+    } else {
+      const newMovies = state.movies.filter((movie) =>
+        movie.Title.toLowerCase().includes(state.searchQuery.toLowerCase())
+      );
+      setFilteredMovies(newMovies);
+    }
+  }, [state.searchQuery, state.movies]);
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {movies?.map((item) => (
+      {filteredMovies.map((item) => (
         <MovieCard
-          key={item.imdbID}
+          key={`${item.imdbID}${Math.random() * 10}`}
           title={item.Title}
           year={item.Year}
           poster={item.Poster}
