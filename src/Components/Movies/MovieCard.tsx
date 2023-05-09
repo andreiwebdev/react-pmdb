@@ -14,7 +14,7 @@ const MovieCard = (props: Props) => {
   const [moviePoster, setMoviePoster] = useState("");
 
   useEffect(() => {
-    setMoviePoster(props.images[0]);
+    setMoviePoster(props.images[2]);
   }, []);
 
   return (

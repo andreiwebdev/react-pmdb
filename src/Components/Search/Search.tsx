@@ -2,7 +2,7 @@ import { ChangeEvent, useContext } from "react";
 import { MoviesContext } from "../../store/MoviesContext";
 
 const Search = () => {
-  const [, setState] = useContext(MoviesContext);
+  const [state, setState] = useContext(MoviesContext);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -18,6 +18,7 @@ const Search = () => {
       className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-yellow-400 mb-10"
     >
       <input
+        value={state.searchQuery}
         onChange={handleSearch}
         type="email"
         id="UserEmail"
