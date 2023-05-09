@@ -4,7 +4,7 @@ import Search from "../Components/Search/Search";
 
 const HomePage = () => {
   return (
-    <Container>
+    <Container extraClasses="">
       <Search />
       <MoviesList />
     </Container>
