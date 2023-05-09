@@ -1,15 +1,16 @@
-import Container from "./Components/Common/Container";
-import MoviesList from "./Components/Movies/MoviesList";
-import Search from "./Components/Search/Search";
+import HomePage from "./pages/HomePage";
+import MoviePage from "./pages/MoviePage";
 import { MoviesProvider } from "./store/MoviesContext";
+
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
     <MoviesProvider>
-      <Container>
-        <Search />
-        <MoviesList />
-      </Container>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movie/:imdbID" element={<MoviePage />} />
+      </Routes>
     </MoviesProvider>
   );
 };

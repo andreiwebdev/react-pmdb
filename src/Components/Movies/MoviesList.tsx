@@ -39,6 +39,7 @@ const MoviesList = () => {
       {filteredMovies.map((item) => (
         <MovieCard
           key={`${item.imdbID}${Math.random() * 10}`}
+          imdbID={item.imdbID}
           title={item.Title}
           year={item.Year}
           poster={item.Poster}

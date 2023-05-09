@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type Props = {
+  imdbID: string;
   title: string;
   year: number;
   poster: string;
@@ -16,8 +18,8 @@ const MovieCard = (props: Props) => {
   }, []);
 
   return (
-    <a
-      href="#"
+    <Link
+      to={`/movie/${props.imdbID}`}
       className={`relative block overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat transform transition duration-500 hover:scale-105 h-60 md:h-[500px]`}
       style={{ backgroundImage: `url(${moviePoster})` }}
     >
@@ -42,7 +44,7 @@ const MovieCard = (props: Props) => {
           </svg>
         </span>
       </div>
-    </a>
+    </Link>
   );
 };
 
